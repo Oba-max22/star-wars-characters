@@ -1,0 +1,66 @@
+import React, { useEffect, useState } from 'react';
+import { getPeoplePage, getNextPage, getPreviousPage } from '../utils/api';
+import PersonModal from './PersonModal';
+import '../styles/People.css';
+
+const People = () => {
+
+    const [people, setPeople] = useState([]);
+    const [selectedPerson, setSelectedPerson] = useState(null);
+
+    useEffect(() => {
+        handleGetPage();
+    }, []);
+
+    const handleGetPage = () => {
+        getPeoplePage().then((response) => {
+            localStorage.setItem('people', JSON.stringify(response.data));
+            setPeople(response.data);
+        });
+    }
+
+    const handleGetNextPage = () => {
+        getNextPage().then((response) => {
+          localStorage.setItem('people', JSON.stringify(response.data));
+          setPeople(response.data);
+        });
+    }
+
+    const handleGetPreviousPage = () => {
+        getPreviousPage().then((response) => {
+            localStorage.setItem('people', JSON.stringify(response.data));
+            setPeople(response.data);
+        });
+    }
+
+    const handleSelectPerson = (person) => {
+        setSelectedPerson(person);
+    };
+
+    const handleCloseModal = () => {
+        setSelectedPerson(null);
+    };
+
+    return (
+        <div className='container'>
+            <h1>Star Wars Characters</h1>
+            
+            {selectedPerson ? (
+            <PersonModal person={selectedPerson} handleClose={handleCloseModal} />
+            ) : <ul>
+                {people.results ? people.results.map((person, index) => (
+                <li key={index} onClick={() => handleSelectPerson(person)}>{person.name}</li>
+                )) : null}
+            </ul>}
+            <div className='btn-container'>
+                <button className='btn btn-refresh' onClick={() => handleGetPage()}>Refresh</button>
+                <button className='btn btn-next' onClick={() => handleGetNextPage()} disabled={people.next == null}>Next</button>
+                <button className='btn btn-prev' onClick={() => handleGetPreviousPage()} disabled={people.previous == null}>Previous</button>
+            </div>   
+        </div>
+    );
+}
+
+export default People;
+
+

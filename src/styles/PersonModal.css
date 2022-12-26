@@ -1,0 +1,45 @@
+.modal-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%;
+    color: #000;
+}
+
+.modal {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 0 auto;
+    padding: 10px;
+    width: 50%;
+}
+
+.btn-close {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #000;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0 10px;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+.btn-close:hover {
+    background-color: #ccc;
+}
+
+h2 {
+    font-size: 24px;
+    margin: 0;
+    text-align: center;
+}
+
+p {
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
