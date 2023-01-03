@@ -28,6 +28,7 @@ h1 {
 ul {
     list-style: none;
     padding: 0;
+    position: relative;
 }
 
 li {
@@ -66,4 +67,10 @@ li:hover {
 .btn:disabled {
     background-color: #ccc;
     cursor: not-allowed;
+}
+
+.loading {
+    position: absolute;
+    align-self: center;
+    z-index:10000000;
 }
